@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    CardView dexTests;
+    CardView dexTests, speechTest;
     private DatabaseReference mDatabase;
 
     @Override
@@ -29,6 +29,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, DexHomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        speechTest = findViewById(R.id.speechTests);
+        speechTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, SpeechGame.class);
                 startActivity(intent);
             }
         });

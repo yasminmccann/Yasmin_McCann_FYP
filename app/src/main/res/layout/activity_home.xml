@@ -127,7 +127,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="10dp"
-                        android:elevation="0dp">
+                        android:elevation="0dp"
+                        android:id="@+id/speechTests">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
