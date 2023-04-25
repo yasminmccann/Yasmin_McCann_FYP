@@ -20,7 +20,7 @@ public class DexHomeScreenActivity extends AppCompatActivity {
         test1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DexHomeScreenActivity.this,  FingerTest2.class );
+                Intent intent = new Intent(DexHomeScreenActivity.this,  FingerTapTestDescriptionPage.class );
                 startActivity(intent);
             }
         });

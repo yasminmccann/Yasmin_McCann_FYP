@@ -1,5 +1,10 @@
 package com.example.fyp;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     public String name, age, email, gender;
@@ -45,5 +50,21 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    // add this method
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        if(name != null)
+            result.put("name", name);
+        if(age != null)
+            result.put("age", age);
+        if(email != null)
+            result.put("email", email);
+        if(gender != null)
+            result.put("gender", gender);
+
+        return result;
     }
 }

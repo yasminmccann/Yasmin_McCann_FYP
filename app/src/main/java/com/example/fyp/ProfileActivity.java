@@ -136,14 +136,16 @@ public class ProfileActivity extends AppCompatActivity {
           }
       });
 
-        reference.child("Users").child("age").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        reference.child("age").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+                    Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
+                    //Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
+                   // Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
+                    Log.e("firebase", "Error getting data", task.getException());
                 }
             }
         });
