@@ -67,7 +67,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mobility"
+                        android:text="Medication"
                         android:textSize="17dp"
                         android:textColor="#000"/>
                     <TextView
@@ -87,7 +87,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dexterity"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:id="@+id/parkinsonsWebsite"
+                        android:text="Parkinson's Ireland Website"
                         />
 
                     <TextView
@@ -193,7 +196,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -230,7 +233,7 @@
                     android:paddingLeft="15dp"
                     android:layout_gravity="center_vertical"/>
 
-            </LinearLayout>
+            </LinearLayout>-->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -252,15 +255,14 @@
             android:textColor="@color/white"
             android:textSize="18dp" />
 
-            <Button
+          <!--  <Button
                 android:id="@+id/updateProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/light_green"
-                android:text="Update Profile"
-                android:layout_marginEnd="20dp"
+                android:text="Update"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:layout_marginBottom="15dp"/>
@@ -277,13 +279,22 @@
                 android:text="Delete Account"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+-->
+        </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:itemBackground="@color/light_green"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/bottom_nav_menu" />
 
         </LinearLayout>
 
-        </LinearLayout>
 
-
-</LinearLayout>
 <!--
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

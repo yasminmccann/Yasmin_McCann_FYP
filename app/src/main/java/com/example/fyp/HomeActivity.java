@@ -2,12 +2,14 @@ package com.example.fyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    CardView dexTests, speechTest;
+    CardView fingerTapTest, speechTest, agilityTest, pegTest, steps, game;
     private DatabaseReference mDatabase;
 
     @Override
@@ -24,20 +26,56 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        dexTests = (CardView) findViewById(R.id.dexTests);
-        dexTests.setOnClickListener(new View.OnClickListener() {
+        fingerTapTest = (CardView) findViewById(R.id.fingerTapTest);
+        fingerTapTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, DexHomeScreenActivity.class);
+                Intent intent = new Intent(HomeActivity.this, FingerTapTestDescriptionPage.class);
                 startActivity(intent);
             }
         });
 
-        speechTest = findViewById(R.id.speechTests);
+        speechTest = findViewById(R.id.speechTest);
         speechTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SpeechGame.class);
+                Intent intent = new Intent(HomeActivity.this, SpeechTestDescriptionPage.class);
+                startActivity(intent);
+            }
+        });
+
+        agilityTest = findViewById(R.id.agilityTest);
+        agilityTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AgilityTest.class);
+                startActivity(intent);
+            }
+        });
+
+        pegTest = findViewById(R.id.pegTest);
+        pegTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        steps = findViewById(R.id.stepCounter);
+        steps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        game = findViewById(R.id.game);
+        game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, DailyGameActivity.class);
                 startActivity(intent);
             }
         });

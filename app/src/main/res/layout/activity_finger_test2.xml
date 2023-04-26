@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Finger Tap Test"
         android:id="@+id/testName"
-        android:textSize="25sp"
+        android:textSize="35sp"
         android:layout_centerHorizontal="true"
         />
 

@@ -37,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseUser user;
     private DatabaseReference reference;
+    private TextView webSite;
 
     private String userID;
 
@@ -46,6 +47,16 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         logout = (Button) findViewById(R.id.signOut);
+        webSite = (TextView) findViewById(R.id.parkinsonsWebsite);
+
+        webSite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ParkinsonsIrelandLink.class);
+                startActivity(intent);
+            }
+        });
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,10 +103,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-      delete = findViewById(R.id.delete);
+      //delete = findViewById(R.id.delete);
       //bar = findViewById(R.id.progressBar2);
 
-      delete.setOnClickListener(new View.OnClickListener() {
+     /* delete.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               AlertDialog.Builder dialog = new AlertDialog.Builder(ProfileActivity.this);
@@ -134,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
               alertDialog.show();
 
           }
-      });
+      });*/
 
         reference.child("age").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override

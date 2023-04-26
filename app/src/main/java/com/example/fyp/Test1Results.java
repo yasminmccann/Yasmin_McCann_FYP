@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -25,7 +26,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class Test1Results extends AppCompatActivity {
 
@@ -39,6 +44,7 @@ public class Test1Results extends AppCompatActivity {
 
     LineDataSet lineDataSet= new LineDataSet(null,null);
     ArrayList<ILineDataSet> iLineDataSets = new ArrayList<>();
+    List<String> dateLabels = new ArrayList<>();
     ArrayList<Entry> yData;
     //ArrayList<Entry> xData;
     LineData lineData;
@@ -70,6 +76,7 @@ public class Test1Results extends AppCompatActivity {
     public void getData() {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
         //xAxis.setValueFormatter(new MyXAxisValueFormatter());
         //xAxis.setLabelsToSkip(0);
         fireDBUser.addValueEventListener(new ValueEventListener() {
@@ -83,7 +90,7 @@ public class Test1Results extends AppCompatActivity {
         // Set the value formatter
                 XAxis xAxis = lineChart.getXAxis();
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
-            /*    XAxis xAxis = lineChart.getXAxis();
+               /*//XAxis xAxis = lineChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setDrawGridLines(true);
                 xAxis.setGranularity(1f);
@@ -100,12 +107,15 @@ public class Test1Results extends AppCompatActivity {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot myDataSnapShot : snapshot.getChildren()) {
                         i = i + 1;
+
                         Result resultObj = myDataSnapShot.getValue(Result.class);
                         int scoreValue = resultObj.getScore();
                         yData.add(new Entry(i, scoreValue));
+
                     }
                     final LineDataSet lineDataSet = new LineDataSet(yData,"Score");
                     LineData data = new LineData(lineDataSet);
+
                     lineChart.setData(data);
                     lineChart.notifyDataSetChanged();
                     lineChart.invalidate();
