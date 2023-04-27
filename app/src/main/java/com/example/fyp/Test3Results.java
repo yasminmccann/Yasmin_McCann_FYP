@@ -1,41 +1,30 @@
 package com.example.fyp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class Test1Results extends AppCompatActivity {
+public class Test3Results extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
@@ -71,42 +60,20 @@ public class Test1Results extends AppCompatActivity {
         onlineUserID = mUser.getUid();
 
         //databaseReference = firebaseDatabase.getReference().child("Results").child(onlineUserID);
-        fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Results");
+        fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("AgilityResults");
 
         renderData();
-        //getData();
 
     }
     public void getData() {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        //xAxis.setValueFormatter(new MyXAxisValueFormatter());
-        //xAxis.setLabelsToSkip(0);
         fireDBUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 yData = new ArrayList<>();
-                //xData = new ArrayList<>();
                 float i =0;
-                final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
-
-        // Set the value formatter
-                XAxis xAxis = lineChart.getXAxis();
-                xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
-               /*//XAxis xAxis = lineChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setDrawGridLines(true);
-                xAxis.setGranularity(1f);
-                xAxis.setGranularityEnabled(true);
-                final String xVal[]={"Mon","Tue","Wed", "Thur", "FRi"};
-                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return xVal[(int) value-1]; // xVal is a string array
-                    }
-
-                });*/
 
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot myDataSnapShot : snapshot.getChildren()) {
@@ -150,18 +117,5 @@ public class Test1Results extends AppCompatActivity {
 
         lineChart.getDescription().setText("Time");
         getData();
-    }
-
-    private void showChart(ArrayList<Entry> dataVals){
-
-        lineDataSet.setValues(dataVals);
-        lineDataSet.setLabel("DataSet 1");
-        iLineDataSets.clear();
-        iLineDataSets.add(lineDataSet);
-        lineData = new LineData(iLineDataSets);
-        lineChart.clear();
-        lineChart.setData(lineData);
-        lineChart.invalidate();
-
     }
 }

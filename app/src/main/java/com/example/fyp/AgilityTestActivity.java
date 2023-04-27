@@ -1,11 +1,16 @@
 package com.example.fyp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -15,214 +20,167 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 
 public class AgilityTestActivity extends AppCompatActivity {
 
-    //TextView timer;
+    private ImageView circle1, circle2;
+    private TextView scoreText, timer;
+    private int score = 0;
 
-    private ViewGroup mainLayout;
-    private ImageView image1;
-    private ImageView image2;
+    public FirebaseDatabase firebaseDatabase;
+    public DatabaseReference reference;
+    public FirebaseAuth mAuth;
+    public FirebaseUser mUser;
+    public String onlineUserID;
 
-    private float xCoOrdinate, yCoOrdinate;
+    Date currentTime = Calendar.getInstance().getTime();
+    String testName2 = "Agility Test";
 
-    //Position
-    private float ballDownY;
-    private float ballDownX;
+    String date = String.valueOf(currentTime);
 
-    //Screen Size
-    private int screenWidth;
-    private int screenHeight;
-
-    //Initialize Class
-    private Handler handler = new Handler();
-    private Timer timer = new Timer();
-
-    //score
-    private TextView score = null;
-
-    //for net movement along x-axis
-    public float x = 0;
-    public float y = 0;
-
-    //points
-    private int points = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agility_test);
-       /* timer =  findViewById(R.id.timer);
-        new CountDownTimer(11000, 1000) {
 
+        ArrayList<Result> resultlist = new ArrayList<>();
+
+        circle1 = findViewById(R.id.circle1);
+        circle2 = findViewById(R.id.circle2);
+        scoreText = findViewById(R.id.scoreTxtView);
+        timer = findViewById(R.id.timerText);
+
+        circle1.setOnTouchListener(new CircleTouchListener());
+        circle2.setOnTouchListener(new CircleTouchListener());
+
+        // create the timer and start it
+        new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
-                timer.setText("seconds left: " + millisUntilFinished / 1000);
-                //here you can have your logic to set text to edittext
+                // update the timer display
+                timer.setText("Time remaining: " + millisUntilFinished / 1000 + " seconds");
             }
 
             public void onFinish() {
-                timer.setText("Stop!");
+                // store the user's score and display it
+                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("score", score);
+                editor.apply();
+                scoreText.setText("Your score: " + score);
+                circle1.setVisibility(View.GONE);
+                circle2.setVisibility(View.GONE);
+                timer.setText("Done!");
+                saveResults();
+                Intent intent = new Intent(AgilityTestActivity.this,Test3Results.class);
+                startActivity(intent);
             }
+        }.start();
 
-        }.start();*/
-
-        mainLayout = (RelativeLayout) findViewById(R.id.main);
-        image1 = (ImageView) findViewById(R.id.circle1);
-        image2 = (ImageView) findViewById(R.id.circle2);
-
-        this.score = (TextView) findViewById(R.id.score);
-
-        //image1.setOnTouchListener(onTouchListener());
-        // image2.setOnTouchListener(onTouchListener());
-
-        //retrieving screen size
-        WindowManager wm = getWindowManager();
-        Display disp = wm.getDefaultDisplay();
-        Point size = new Point();
-        disp.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
-
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(100);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Render();
-                            }
-                        });
-                    }
-                } catch (InterruptedException e) {
-                }
-            }
-        };
-
-        t.start();
-
-        image1.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        xCoOrdinate = view.getX() - event.getRawX();
-                        yCoOrdinate = view.getY() - event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-                        break;
-                    default:
-                        return false;
-                }
-                return true;
-            }
-        });
-
-        image2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        xCoOrdinate = view.getX() - event.getRawX();
-                        yCoOrdinate = view.getY() - event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-                        break;
-                    default:
-                        return false;
-                }
-                return true;
-            }
-        });
-
-    }
-
-    public void Render() {
-        if (Collision(image1, image2)) {
-            points++; //You dont need findView Textview score for that exists in OnCreate Method
-            this.score.setText("Score:" + points);
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        int savedScore = prefs.getInt("score", -1);
+        if (savedScore != -1) {
+            scoreText.setText("Your previous score: " + savedScore);
         }
     }
 
-    private boolean Collision(ImageView image1, ImageView image2) {
-        Rect r1 = new Rect();
-        image2.getHitRect(r1);
-        Rect r2 = new Rect();
-        image1.getHitRect(r2);
-        return r1.intersect(r2);
-
-
+    private class CircleTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            // detect when the user is dragging the circle
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    // update the circle's position based on the touch event
+                    v.setLayoutParams(new ConstraintLayout.LayoutParams(
+                            v.getWidth(), v.getHeight()));
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // check if the circles are overlapping
+                    if (isOverlap(circle1, circle2)) {
+                        // hide both circles and generate new positions
+                        circle1.setVisibility(View.INVISIBLE);
+                        circle2.setVisibility(View.INVISIBLE);
+                        generateNewPositions();
+                        // increase the score
+                        score++;
+                        scoreText.setText("Score: " + score);
+                    }
+                    break;
+            }
+            return true;
+        }
     }
 
-   // public void changePos() {
+    private boolean isOverlap(View v1, View v2) {
+        // check if the two circles overlap
+        Rect r1 = new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
+        Rect r2 = new Rect(v2.getLeft(), v2.getTop(), v2.getRight(), v2.getBottom());
+        return r1.intersect(r2);
+    }
 
-        //down
-            /*ballDownY += 10;
-            if (image2.getY() > screenHeight) {
-                ballDownX = (float) Math.floor((Math.random() * (screenWidth - image2.getWidth())));
-                ballDownY = -100.0f;
+    private void generateNewPositions() {
+        // generate new random positions for the circles
+        Random rand = new Random();
+        int maxX = ((ConstraintLayout) circle1.getParent()).getWidth() - circle1.getWidth();
+        int maxY = ((ConstraintLayout) circle1.getParent()).getHeight() - circle1.getHeight();
+        float minDistance = 200; // minimum distance between circles
+        float distance = 0;
+        int x1, y1, x2, y2;
+        do {
+            x1 = rand.nextInt(maxX);
+            y1 = rand.nextInt(maxY);
+            x2 = rand.nextInt(maxX);
+            y2 = rand.nextInt(maxY);
+            // calculate distance between the circles
+            distance = (float) Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        } while (distance < minDistance);
+        // set the new positions and make the circles visible again
+        circle1.setX(x1);
+        circle1.setY(y1);
+        circle1.setVisibility(View.VISIBLE);
+        circle2.setX(x2);
+        circle2.setY(y2);
+        circle2.setVisibility(View.VISIBLE);
+    }
 
-            }*/
-       // image2.setY(ballDownY);
-       // image2.setX(ballDownX);
+    public void saveResults() {
 
+        mAuth = FirebaseAuth.getInstance();
 
-        //make net follow finger
-        /*mainLayout.setOnTouchListener(new View.OnTouchListener() {
+        mUser = mAuth.getCurrentUser();
+        onlineUserID = mUser.getUid();
+        reference = FirebaseDatabase.getInstance().getReference().child("AgilityResults").child(onlineUserID);
+        //reference = FirebaseDatabase.getInstance().getReference().child("Tasks").child(onlineUserID);
+        int finalScore = score;
+        String id = reference.push().getKey();
+        Result result = new Result(id, testName2, score, date);
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("AgilityResults").push().setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                x = event.getX();
-                y = event.getY();
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(AgilityTestActivity.this, "Results was added successfully", Toast.LENGTH_SHORT).show();
 
-                if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    image1.setX(x);
-                    image1.setY(y);
+
+                } else {
+                    String error = task.getException().toString();
+                    Toast.makeText(AgilityTestActivity.this, "Failed: " + error, Toast.LENGTH_SHORT).show();
+
                 }
-                return true;
             }
-
-        });*/
-
-   // }
-    /* private View.OnTouchListener onTouchListener() {
-        return new View.OnTouchListener() {
-
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-
-                final int x = (int) event.getRawX();
-                final int y = (int) event.getRawY();
-
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams)
-                                view.getLayoutParams();
-
-                        xDelta = x - lParams.leftMargin;
-                        yDelta = y - lParams.topMargin;
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
-                                .getLayoutParams();
-                        layoutParams.leftMargin = x - xDelta;
-                        layoutParams.topMargin = y - yDelta;
-                        layoutParams.rightMargin = 0;
-                        layoutParams.bottomMargin = 0;
-                        view.setLayoutParams(layoutParams);
-                        break;
-                }
-                mainLayout.invalidate();
-                return true;
-            }
-        };
-    }*/
+        });
+    }
 }

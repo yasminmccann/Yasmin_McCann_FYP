@@ -46,58 +46,34 @@ public class UpdateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            for (UserInfo profile : user.getProviderData()) {
+//                // Id of the provider (ex: google.com)
+//                String providerId = profile.getProviderId();
+//
+//                // UID specific to the provider
+//                String uid = profile.getUid();
+//
+//                // Name, email address, and profile photo Url
+//                String name = profile.getDisplayName();
+//                String email = profile.getEmail();
+//            }
+//        }
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
         //final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
-        final TextView fullNameTextView = (TextView) findViewById(R.id.updateName);
-        final TextView emailTextView = (TextView) findViewById(R.id.updateEmail);
-        final TextView ageTextView = (TextView) findViewById(R.id.updateAge);
-        final TextView genderTextView = (TextView) findViewById(R.id.updateGender);
+        name = findViewById(R.id.updateName);
+        email = findViewById(R.id.updateEmail);
+        age = findViewById(R.id.updateAge);
+        gender = findViewById(R.id.updateGender);
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
-
-                if (userProfile != null) {
-                    String name = userProfile.name;
-                    String email = userProfile.email;
-                    String age = userProfile.age;
-                    String gender = userProfile.gender;
-
-                    //greetingTextView.setText("Welcome back, " + fullName + "!");
-                    fullNameTextView.setText(name);
-                    emailTextView.setText(email);
-                    ageTextView.setText(age);
-                    genderTextView.setText(gender);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UpdateProfile.this, "Something went wrong!", Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-        reference.child("age").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
-                    //Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    // Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-            }
-        });
     }
 
     public void update(View view) {
+
     }
 
     private void showAllUserData() {

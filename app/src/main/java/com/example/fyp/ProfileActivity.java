@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,10 +35,11 @@ public class ProfileActivity extends AppCompatActivity {
     private Button logout;
     private Button delete;
     //ProgressBar bar;
+    BottomNavigationView bottomNavigationView;
 
     private FirebaseUser user;
     private DatabaseReference reference;
-    private TextView webSite;
+    private TextView webSite, moodTracker, meds;
 
     private String userID;
 
@@ -49,10 +51,42 @@ public class ProfileActivity extends AppCompatActivity {
         logout = (Button) findViewById(R.id.signOut);
         webSite = (TextView) findViewById(R.id.parkinsonsWebsite);
 
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId())
+                {
+                    case R.id.profile:
+                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.settings:
+                        startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         webSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, ParkinsonsIrelandLink.class);
+                startActivity(intent);
+            }
+        });
+
+        meds = findViewById(R.id.medsTracker);
+        meds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MedActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,6 +97,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        moodTracker = findViewById(R.id.moodTrack);
+        moodTracker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MoodTracker.class);
                 startActivity(intent);
             }
         });

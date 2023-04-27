@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpeechTestDescriptionPage">
+    tools:context=".GameDescriptionPage">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Speech Test "
+        android:text="Fun Daily Game "
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="35sp"
@@ -23,10 +23,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The daily speech excerises, this will help improve your overall projection of your voice and allow you to feel more confident when talking to people everyday. All you have to is say each word loud and clear.  "
+        android:text="This is a fasting moving maze game.
+
+        How to Play: Place your finger on block to move and don't hit any obstacles in your way "
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -53,7 +55,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Works on maintaining and improving the projections and clearness of your voice to allow you to feel more confident every day"
+        android:text="This is just a fun little game you can play, once you have finished all your daily tests"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"

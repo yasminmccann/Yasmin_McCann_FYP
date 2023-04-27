@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         agilityTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AgilityTest.class);
+                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
                 startActivity(intent);
             }
         });
