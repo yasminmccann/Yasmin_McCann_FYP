@@ -24,4 +24,9 @@ public class GameDescriptionPage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

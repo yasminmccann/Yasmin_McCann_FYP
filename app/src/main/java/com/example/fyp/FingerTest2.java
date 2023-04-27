@@ -99,12 +99,12 @@ public class FingerTest2 extends AppCompatActivity {
 
         mUser = mAuth.getCurrentUser();
         onlineUserID = mUser.getUid();
-        reference = FirebaseDatabase.getInstance().getReference().child("Results").child(onlineUserID);
+        reference = FirebaseDatabase.getInstance().getReference().child("FingerTapResults").child(onlineUserID);
         //reference = FirebaseDatabase.getInstance().getReference().child("Tasks").child(onlineUserID);
         int score = mCounter;
         String id = reference.push().getKey();
         Result result = new Result(id, testName1, score, date);
-        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Results").push().setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("FingerTapResults").push().setValue(result).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
@@ -119,22 +119,11 @@ public class FingerTest2 extends AppCompatActivity {
             }
         });
 
-       /* reference.child("Results").setValue(result).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(FingerTest2.this, "Write is successful",
-                        Toast.LENGTH_LONG).show();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(FingerTest2.this, "Write is failed",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });*/
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }

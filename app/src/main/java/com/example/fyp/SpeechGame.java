@@ -234,4 +234,9 @@ public class SpeechGame extends AppCompatActivity implements RecognitionListener
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

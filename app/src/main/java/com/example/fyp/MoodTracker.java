@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -96,6 +97,12 @@ public class MoodTracker extends AppCompatActivity {
             // Save mood entry to Firebase database
             Mood moodEntry = new Mood(dateString, selectedMood);
             mDatabase.child("moodEntries").push().setValue(moodEntry);
+            Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

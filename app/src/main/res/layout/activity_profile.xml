@@ -91,7 +91,7 @@
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:id="@+id/parkinsonsWebsite"
-                        android:text="Parkinson's Ireland Website"
+                        android:text="Parkinsons Association of Ireland"
                         />
 
                     <TextView
@@ -141,6 +141,7 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+
                 android:src="@drawable/ic_baseline_email_24"
                 />
             <TextView
@@ -158,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="25dp">
             <ImageView
                 android:layout_width="45dp"
@@ -180,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="25dp">
             <ImageView
                 android:layout_width="45dp"

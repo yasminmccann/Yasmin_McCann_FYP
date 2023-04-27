@@ -223,8 +223,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Manage Your Daily Step Intake"
+                    android:hint="Manage Your Daily Step Intake"
                     android:gravity="center"
+                    android:id="@+id/stepCount"
                     android:padding="3dp"
                     android:textColor="@android:color/darker_gray"/>
             </LinearLayout>

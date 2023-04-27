@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
             player = new RectPlayer(new Rect(100, 100,200,200), Color.rgb(255,0,0));
             playerPoint= new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4 );
             player.update(playerPoint);
-            obstacleManager = new ObstacleManager(200,350, 75, Color.BLACK);
+            obstacleManager = new ObstacleManager(200,350, 75, Color.parseColor("#0ED6B9"));
             setFocusable(true);
 
         }
@@ -44,7 +44,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
             playerPoint= new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4 );
             player.update(playerPoint);
-            obstacleManager = new ObstacleManager(200,350,75,Color.BLACK);
+            obstacleManager = new ObstacleManager(200,350,75,Color.parseColor("#0ED6B9"));
             movingPlayer = false;
         }
 
@@ -119,7 +119,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         if (gameOver){
             Paint paint = new Paint();
             paint.setTextSize(100);
-            paint.setColor(Color.MAGENTA);
+            paint.setColor(Color.BLACK);
             drawCenterText(canvas, paint, "GAME OVER");
         }
     }

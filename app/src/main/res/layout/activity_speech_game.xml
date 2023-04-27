@@ -50,7 +50,9 @@
         android:id="@+id/messageTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If same word is display keep trying!"
+        android:gravity="center"
+        android:text="If same word as not changed,
+        Keep trying!"
         android:textSize="25sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

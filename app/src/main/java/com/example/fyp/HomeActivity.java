@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +26,10 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     CardView fingerTapTest, speechTest, agilityTest, pegTest, steps, game;
     private DatabaseReference mDatabase;
+
+    private SensorManager sensorManager;
+    private Sensor stepSensor;
+    private int stepCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +72,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        steps = findViewById(R.id.stepCounter);
-        steps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
-                startActivity(intent);
-            }
-        });
-
         game = findViewById(R.id.game);
         game.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +104,39 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+//        steps = findViewById(R.id.stepCounter);
+//        steps.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
+        sensorManager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+                    stepCount = (int) event.values[0];
+                    // Update the step count TextView
+                    TextView stepCountView = findViewById(R.id.stepCount);
+                    stepCountView.setText(String.valueOf(stepCount));
+                }
+            }
 
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+                // Not used
+            }
+        }, stepSensor, SensorManager.SENSOR_DELAY_UI);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }

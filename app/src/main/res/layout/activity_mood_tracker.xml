@@ -52,6 +52,9 @@
         android:layout_below="@+id/mood_text_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Save mood entry" />
+        android:textSize="25sp"
+        android:text="Save mood entry"
+        android:background="@color/light_green"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

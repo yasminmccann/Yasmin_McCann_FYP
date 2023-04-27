@@ -118,4 +118,9 @@ public class Test3Results extends AppCompatActivity {
         lineChart.getDescription().setText("Time");
         getData();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

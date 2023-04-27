@@ -21,4 +21,9 @@ public class DailyGameActivity extends AppCompatActivity {
         Constants.SCREEN_WIDTH = dm.widthPixels;
         setContentView(new GamePanel(this));
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

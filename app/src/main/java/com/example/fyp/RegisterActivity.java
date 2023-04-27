@@ -161,4 +161,9 @@ public class RegisterActivity extends AppCompatActivity {
                             .build();
 
         }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     }

@@ -25,4 +25,9 @@ public class SpeechTestDescriptionPage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

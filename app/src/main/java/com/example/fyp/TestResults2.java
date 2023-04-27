@@ -77,19 +77,7 @@ public class TestResults2 extends AppCompatActivity {
                 // Set the value formatter
                 XAxis xAxis = lineChart.getXAxis();
                 xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
-            /*    XAxis xAxis = lineChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                xAxis.setDrawGridLines(true);
-                xAxis.setGranularity(1f);
-                xAxis.setGranularityEnabled(true);
-                final String xVal[]={"Mon","Tue","Wed", "Thur", "FRi"};
-                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return xVal[(int) value-1]; // xVal is a string array
-                    }
 
-                });*/
 
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot myDataSnapShot : snapshot.getChildren()) {
@@ -117,16 +105,8 @@ public class TestResults2 extends AppCompatActivity {
 
 
     }
-    private void showChart(ArrayList<Entry> dataVals){
-
-        lineDataSet.setValues(dataVals);
-        lineDataSet.setLabel("DataSet 2");
-        iLineDataSets.clear();
-        iLineDataSets.add(lineDataSet);
-        lineData = new LineData(iLineDataSets);
-        lineChart.clear();
-        lineChart.setData(lineData);
-        lineChart.invalidate();
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

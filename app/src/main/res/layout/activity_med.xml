@@ -7,14 +7,36 @@
     android:padding="16dp"
     tools:context=".MedActivity">
 
-    <EditText
-        android:id="@+id/medTxtView"
+    <TextView
+        android:id="@+id/titleTxtView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Type in medicine name here"
+        android:text="Add Medication"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/medTxtView"
+        android:layout_below="@+id/titleTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Medicine Name"
         android:gravity="center"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/dosage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Dosage"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_below="@+id/medTxtView"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold" />-->
 
     <TimePicker
         android:id="@+id/chooseTimeTxt"
@@ -29,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/chooseTimeTxt"
         android:layout_marginTop="16dp"
-        android:text="Set Reminder" />
+        android:text="Add meds and Set Reminder" />
 
     <TextView
         android:id="@+id/reminder_text_view"
@@ -39,6 +61,14 @@
         android:text=""
         android:textSize="18sp"
         android:layout_marginTop="16dp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/addBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/reminder_text_view"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:text="Add Meds" />-->
 
          <!--   <TextView
                 android:id="@+id/medicationsTextView"

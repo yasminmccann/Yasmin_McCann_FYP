@@ -164,4 +164,9 @@ public class Test1Results extends AppCompatActivity {
         lineChart.invalidate();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

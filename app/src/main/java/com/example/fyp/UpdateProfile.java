@@ -89,4 +89,9 @@ public class UpdateProfile extends AppCompatActivity {
         age.getEditText().setText(user_age);
         gender.getEditText().setText(user_gender);*/
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
