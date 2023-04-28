@@ -136,8 +136,10 @@ public class SpeechGame extends AppCompatActivity implements RecognitionListener
             public void onFinish() {
                 displayResults("Time's up! Score: " + score + "/" + words.length);
                 saveResults();
+                speechRecognizer.stopListening();
                 Intent intent = new Intent(SpeechGame.this,TestResults2.class);
                 startActivity(intent);
+
             }
         };
         timer.start();

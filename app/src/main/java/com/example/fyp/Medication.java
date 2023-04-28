@@ -6,7 +6,6 @@ public class Medication {
 
 
         public Medication() {
-            // Default constructor required for calls to DataSnapshot.getValue(Medication.class)
         }
 
     public Medication(String name, String dosage) {

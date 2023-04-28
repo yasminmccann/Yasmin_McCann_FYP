@@ -5,8 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -33,12 +40,12 @@ public class TestResults2 extends AppCompatActivity {
 
     LineDataSet lineDataSet= new LineDataSet(null,null);
     ArrayList<ILineDataSet> iLineDataSets = new ArrayList<>();
-    ArrayList<Entry> yData;
+    ArrayList<BarEntry> yData;
     //ArrayList<Entry> xData;
     LineData lineData;
 
     // variable for Text view.
-    LineChart lineChart;
+    BarChart lineChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +64,8 @@ public class TestResults2 extends AppCompatActivity {
 
         //databaseReference = firebaseDatabase.getReference().child("Results").child(onlineUserID);
         fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("SpeechResults");
-
-        getData();
+        lineChart.getDescription().setText("Time");
+        renderData();
 
     }
     public void getData() {
@@ -72,11 +79,11 @@ public class TestResults2 extends AppCompatActivity {
                 yData = new ArrayList<>();
                 //xData = new ArrayList<>();
                 float i =0;
-                final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
-
-                // Set the value formatter
-                XAxis xAxis = lineChart.getXAxis();
-                xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
+//                final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
+//
+//                // Set the value formatter
+//                XAxis xAxis = lineChart.getXAxis();
+//                xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
 
 
                 if (snapshot.hasChildren()) {
@@ -84,10 +91,10 @@ public class TestResults2 extends AppCompatActivity {
                         i = i + 1;
                         Result resultObj = myDataSnapShot.getValue(Result.class);
                         int scoreValue = resultObj.getScore();
-                        yData.add(new Entry(i, scoreValue));
+                        yData.add(new BarEntry(i, scoreValue));
                     }
-                    final LineDataSet lineDataSet = new LineDataSet(yData,"Score");
-                    LineData data = new LineData(lineDataSet);
+                    final BarDataSet lineDataSet = new BarDataSet(yData,"Score");
+                    BarData data = new BarData(lineDataSet);
                     lineChart.setData(data);
                     lineChart.notifyDataSetChanged();
                     lineChart.invalidate();
@@ -104,6 +111,20 @@ public class TestResults2 extends AppCompatActivity {
         });
 
 
+    }
+
+    public void renderData() {
+        LimitLine limitLine = new LimitLine(8f, "Average Score");
+        limitLine.setLineWidth(2f);
+        limitLine.enableDashedLine(10f, 10f, 0f);
+        limitLine.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        limitLine.setTextSize(10f);
+
+        YAxis yAxis = lineChart.getAxisLeft();
+        yAxis.addLimitLine(limitLine);
+
+        lineChart.getDescription().setText("Time");
+        getData();
     }
     @Override
     public void onBackPressed() {

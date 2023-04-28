@@ -44,8 +44,6 @@ public class MoodTracker extends AppCompatActivity {
 
         // Set up Firebase database reference
         mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-      //  fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Results");
-
 
         // Set up mood seek bar listener
         moodSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -85,7 +83,7 @@ public class MoodTracker extends AppCompatActivity {
     }
 
     private void updateMoodTextView() {
-        String[] moodOptions = {"Very sad", "Sad", "Neutral", "Happy", "Very happy"};
+        String[] moodOptions = {"Very sad", "Sad", "Normal", "Happy", "Very happy"};
         moodTextView.setText(moodOptions[selectedMood]);
     }
 

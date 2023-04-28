@@ -89,11 +89,7 @@ public class Test1Results extends AppCompatActivity {
                 yData = new ArrayList<>();
                 //xData = new ArrayList<>();
                 float i =0;
-                final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
 
-        // Set the value formatter
-                XAxis xAxis = lineChart.getXAxis();
-                xAxis.setValueFormatter(new MyXAxisValueFormatter(weekdays));
                /*//XAxis xAxis = lineChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setDrawGridLines(true);

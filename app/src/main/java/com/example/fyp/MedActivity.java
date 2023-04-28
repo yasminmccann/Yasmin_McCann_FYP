@@ -1,5 +1,7 @@
 package com.example.fyp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,8 +36,6 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MedActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     private TextView medicineTextView;
     private EditText medName, dosage;
@@ -76,29 +76,7 @@ public class MedActivity extends AppCompatActivity {
 
             }
         });
-
-//        // Read the medicine reminder time from Firebase
-//        String medicineName = medicineTextView.getText().toString().trim();
-//        String dosageNum = dosage.getText().toString().trim();
-//
-//        Medication medication = new Medication(medicineName, dosageNum);
-//        mDatabase.child("medication").push().setValue(medication);
-//        mDatabase.child("medicine").child(medicineName).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    String reminderTime = snapshot.getValue(String.class);
-//                    reminderTextView.setText("Reminder set for: " + reminderTime);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.e(TAG, "onCancelled", error.toException());
-//            }
-//        });
     }
-
     private void setReminder() {
         // Get medicine name
         String medicineName = medicineTextView.getText().toString().trim();

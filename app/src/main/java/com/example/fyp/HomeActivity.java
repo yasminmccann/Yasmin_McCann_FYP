@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         agilityTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AgilityDescriptionPage.class);
                 startActivity(intent);
             }
         });
@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, DailyGameActivity.class);
+                Intent intent = new Intent(HomeActivity.this, DailyGameDescriptionPage.class);
                 startActivity(intent);
             }
         });
@@ -104,35 +104,35 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        steps = findViewById(R.id.stepCounter);
-//        steps.setOnClickListener(new View.OnClickListener() {
+        steps = findViewById(R.id.stepCounter);
+        steps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, StepTrackerActivity.class);
+                startActivity(intent);
+            }
+        });
+//        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+//        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+//
+//        sensorManager.registerListener(new SensorEventListener() {
 //            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeActivity.this, AgilityTestActivity.class);
-//                startActivity(intent);
+//            public void onSensorChanged(SensorEvent event) {
+//                if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+//                    stepCount = (int) event.values[0];
+//                    // Update the step count TextView
+//                    TextView stepCountView = findViewById(R.id.stepCount);
+//                    stepCountView.setText(String.valueOf(stepCount));
+//                }
 //            }
-//        });
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-
-        sensorManager.registerListener(new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-                    stepCount = (int) event.values[0];
-                    // Update the step count TextView
-                    TextView stepCountView = findViewById(R.id.stepCount);
-                    stepCountView.setText(String.valueOf(stepCount));
-                }
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-                // Not used
-            }
-        }, stepSensor, SensorManager.SENSOR_DELAY_UI);
-
-    }
+//
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//                // Not used
+//            }
+//        }, stepSensor, SensorManager.SENSOR_DELAY_UI);
+//
+  }
 
     @Override
     public void onBackPressed() {

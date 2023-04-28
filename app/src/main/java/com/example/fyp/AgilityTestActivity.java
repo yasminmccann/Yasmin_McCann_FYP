@@ -72,7 +72,7 @@ public class AgilityTestActivity extends AppCompatActivity {
         new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 // update the timer display
-                timer.setText("Time remaining: " + millisUntilFinished / 1000 + " seconds");
+                timer.setText(millisUntilFinished / 1000 + " seconds");
             }
 
             public void onFinish() {
@@ -94,7 +94,7 @@ public class AgilityTestActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         int savedScore = prefs.getInt("score", -1);
         if (savedScore != -1) {
-            scoreText.setText("Your previous score: " + savedScore);
+            scoreText.setText("Previous score: " + savedScore);
         }
     }
 

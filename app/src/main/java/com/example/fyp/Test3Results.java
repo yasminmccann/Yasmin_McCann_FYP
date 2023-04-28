@@ -2,7 +2,10 @@ package com.example.fyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -13,6 +16,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +68,8 @@ public class Test3Results extends AppCompatActivity {
 
         renderData();
 
+
+
     }
     public void getData() {
         XAxis xAxis = lineChart.getXAxis();
@@ -114,6 +120,7 @@ public class Test3Results extends AppCompatActivity {
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.addLimitLine(limitLine);
+
 
         lineChart.getDescription().setText("Time");
         getData();

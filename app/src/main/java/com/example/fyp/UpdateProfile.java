@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,14 +34,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class UpdateProfile extends AppCompatActivity {
 
-    private FirebaseUser user;
-    private DatabaseReference reference;
+    EditText nameTxt, ageTxt, genderTxt;
 
-    EditText name, age, email, gender;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    DatabaseReference dbRef;
 
-    private String userID;
+    Button update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,38 +65,72 @@ public class UpdateProfile extends AppCompatActivity {
 //                String email = profile.getEmail();
 //            }
 //        }
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userID = user.getUid();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        dbRef = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
 
         //final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
-        name = findViewById(R.id.updateName);
-        email = findViewById(R.id.updateEmail);
-        age = findViewById(R.id.updateAge);
-        gender = findViewById(R.id.updateGender);
+        nameTxt = findViewById(R.id.updateName);
+        ageTxt = findViewById(R.id.updateAge);
+        genderTxt = findViewById(R.id.updateGender);
+        updateProfile();
+
+        update = findViewById(R.id.updateUser);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProfile();
+            }
+        });
 
     }
 
-    public void update(View view) {
+    private void updateProfile() {
+        String name = nameTxt.getText().toString().trim();
+        String age = ageTxt.getText().toString().trim();
+        String gender = genderTxt.getText().toString().trim();
 
-    }
+        if (name.isEmpty()) {
+            nameTxt.setError("Full name is required!");
+            nameTxt.requestFocus();
+            return;
+        }
 
-    private void showAllUserData() {
-        Intent intent = getIntent();
-        String user_username = intent.getStringExtra("username");
-        String user_name = intent.getStringExtra("name");
-        String user_email = intent.getStringExtra("email");
-        String user_age = intent.getStringExtra("age");
-        String user_gender = intent.getStringExtra("gender");
+        if (age.isEmpty()) {
+            ageTxt.setError("Age is required!");
+            ageTxt.requestFocus();
+            return;
+        }
 
-       /* name.getEditText().setText(user_name);
-        email.getEditText().setText(user_email);
-        age.getEditText().setText(user_age);
-        gender.getEditText().setText(user_gender);*/
+        if (gender.isEmpty()) {
+            genderTxt.setError("Gender is required!");
+            genderTxt.requestFocus();
+            return;
+        }
+
+        HashMap<String, Object> updatedUserData = new HashMap<>();
+        updatedUserData.put("name", name);
+        updatedUserData.put("gender", gender);
+        updatedUserData.put("age", age);
+
+        dbRef.updateChildren(updatedUserData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Data updated successfully
+                Toast.makeText(UpdateProfile.this, "Successfully updated", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // An error occurred while updating data
+                Toast.makeText(UpdateProfile.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
     }
 }
