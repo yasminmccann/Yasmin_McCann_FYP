@@ -100,7 +100,7 @@ public class SpeechGame extends AppCompatActivity implements RecognitionListener
 
     private void startPractice() {
         if (currentWordIndex >= words.length) {
-            displayResults("Practice session over. Score: " + score + "/" + words.length);
+            displayResults("Score: " + score + "/" + words.length);
             return;
         }
 
@@ -125,7 +125,7 @@ public class SpeechGame extends AppCompatActivity implements RecognitionListener
             timer.cancel();
         }
 
-        timer = new CountDownTimer(30000, 1000) {
+        timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long secondsRemaining = TimeUnit.SECONDS.convert(millisUntilFinished, TimeUnit.MILLISECONDS);

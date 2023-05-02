@@ -23,7 +23,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The daily speech excerises, this will help improve your overall projection of your voice and allow you to feel more confident when talking to people everyday. All you have to is say each word loud and clear.  "
+        android:text="These daily speech exercises, this will help improve your overall projection of your voice and allow you to feel more confident when talking to people everyday. All you have to is say each word loud and clear.  "
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"

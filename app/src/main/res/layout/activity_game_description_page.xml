@@ -23,7 +23,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is a fasting moving maze game.
+        android:text="This is a moving obstacle game.
 
         How to Play: Place your finger on block to move and don't hit any obstacles in your way "
         android:textAlignment="center"

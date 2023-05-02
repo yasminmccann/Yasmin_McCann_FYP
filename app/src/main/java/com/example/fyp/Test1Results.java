@@ -71,7 +71,7 @@ public class Test1Results extends AppCompatActivity {
         onlineUserID = mUser.getUid();
 
         //databaseReference = firebaseDatabase.getReference().child("Results").child(onlineUserID);
-        fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Results");
+        fireDBUser = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("FingerTapResults");
 
         renderData();
         //getData();

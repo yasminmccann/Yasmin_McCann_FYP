@@ -36,7 +36,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/dexterity"/>
+                    android:src="@drawable/ic_baseline_pan_tool_alt_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Finger Tap Test"
+                    android:text=" Daily Finger Tap Test"
                     android:gravity="center"
                     android:textColor="@android:color/darker_gray"
                     android:padding="3dp"/>
@@ -75,7 +75,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/speech"/>
+                    android:src="@drawable/ic_baseline_mic_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Check your revenue activities"
+                    android:text="Practice Daily Speech Exercises"
                     android:gravity="center"
                     android:padding="3dp"
                     android:textColor="@android:color/darker_gray"/>
@@ -122,7 +122,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/ic_baseline_language_24"/>
+                    android:src="@drawable/ic_baseline_drag_indicator_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select your country Languish"
+                    android:text="Practice your fine hand movements here"
                     android:gravity="center"
                     android:padding="3dp"
                     android:textColor="@android:color/darker_gray"/>
@@ -161,7 +161,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+                    android:src="@drawable/ic_baseline_man_4_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Check your revenue activities"
+                    android:text="Check your Finger Dexterity"
                     android:gravity="center"
                     android:padding="3dp"
                     android:textColor="@android:color/darker_gray"/>
@@ -208,7 +208,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/star"/>
+                    android:src="@drawable/ic_baseline_directions_walk_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -248,7 +248,7 @@
                     android:padding="10dp"
                     android:background="@drawable/circleshape"
                     android:backgroundTint="@color/light_green"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+                    android:src="@drawable/ic_baseline_videogame_asset_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Check your revenue activities"
+                    android:text="Play Fun Daily Game "
                     android:gravity="center"
                     android:padding="3dp"
                     android:textColor="@android:color/darker_gray"/>
@@ -275,9 +275,9 @@
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90dp"
         app:itemBackground="@color/light_green"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"

@@ -14,7 +14,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Acquire wakelock to wake up the device
+
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -24,7 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         wl.acquire(10 * 60 * 1000L /*10 minutes*/);
 
-        // Play the alarm sound
+        // Play sound
         mediaPlayer = MediaPlayer.create(context, R.raw.alarm_sound);
         mediaPlayer.start();
 
