@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseUser user;
     private DatabaseReference reference;
-    private TextView webSite, moodTracker, meds;
+    private TextView webSite, results, meds;
 
     private String userID;
 
@@ -101,11 +101,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        moodTracker = findViewById(R.id.moodTrack);
-        moodTracker.setOnClickListener(new View.OnClickListener() {
+        results = findViewById(R.id.results);
+        results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, MoodTracker.class);
+                Intent intent = new Intent(ProfileActivity.this, ViewAllResults.class);
                 startActivity(intent);
             }
         });

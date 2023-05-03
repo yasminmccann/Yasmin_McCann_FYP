@@ -135,7 +135,7 @@ public class MoodResults extends AppCompatActivity {
     }
 
     public void renderData() {
-        LimitLine limitLine = new LimitLine(55f, "Average Score");
+        LimitLine limitLine = new LimitLine(4f, "Very Happy");
         limitLine.setLineWidth(2f);
         limitLine.enableDashedLine(10f, 10f, 0f);
         limitLine.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
@@ -143,6 +143,42 @@ public class MoodResults extends AppCompatActivity {
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.addLimitLine(limitLine);
+
+        LimitLine limitLine1 = new LimitLine(0f, "Very Sad");
+        limitLine1.setLineWidth(2f);
+        limitLine1.enableDashedLine(10f, 10f, 0f);
+        limitLine1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        limitLine1.setTextSize(10f);
+
+        yAxis = lineChart.getAxisLeft();
+        yAxis.addLimitLine(limitLine1);
+
+        LimitLine limitLine2 = new LimitLine(1f, "Sad");
+        limitLine2.setLineWidth(2f);
+        limitLine2.enableDashedLine(10f, 10f, 0f);
+        limitLine2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        limitLine2.setTextSize(10f);
+
+        yAxis = lineChart.getAxisLeft();
+        yAxis.addLimitLine(limitLine2);
+
+        LimitLine limitLine3 = new LimitLine(2f, "Normal");
+        limitLine3.setLineWidth(2f);
+        limitLine3.enableDashedLine(10f, 10f, 0f);
+        limitLine3.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        limitLine3.setTextSize(10f);
+
+        yAxis = lineChart.getAxisLeft();
+        yAxis.addLimitLine(limitLine3);
+
+        LimitLine limitLine4 = new LimitLine(3f, "Happy");
+        limitLine4.setLineWidth(2f);
+        limitLine4.enableDashedLine(10f, 10f, 0f);
+        limitLine4.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        limitLine4.setTextSize(10f);
+
+        yAxis = lineChart.getAxisLeft();
+        yAxis.addLimitLine(limitLine4);
 
         lineChart.getDescription().setText("Time");
         getData();

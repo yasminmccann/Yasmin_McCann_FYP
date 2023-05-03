@@ -18,6 +18,20 @@
         android:theme="@style/Theme.FYP"
         tools:targetApi="33">
         <activity
+            android:name=".MoodDescriptionPage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ViewAllResults"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MoodResults"
             android:exported="false">
             <meta-data
@@ -226,7 +240,7 @@
         <activity android:name=".ForgotPassActivity" />
 
         <receiver
-            android:name="com.example.fyp.AlarmReceiver"
+            android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
